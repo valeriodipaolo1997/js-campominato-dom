@@ -52,6 +52,22 @@ let levels = difficulty.value;
     console.log(bombs);
 
 
+} else if (levels === "3") {
+    createTable(gameTable, 49);
+    safeNumbers = 33;
+
+
+    while (bombs.length < 16) {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 49) + 1;
+        } while (bombs.includes(randomNumber));
+
+        bombs.push(randomNumber);
+    }
+
+    console.log(bombs);
+
 
 }
 });
