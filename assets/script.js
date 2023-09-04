@@ -6,35 +6,51 @@ Al termine della partita il software deve comunicare il punteggio, cioè il nume
 
 
 //definisco le variabili
-const btn = document.querySelector('button');
-const scoreDomEl = document.querySelector('.score');
-const scoreNumberEl = document.querySelector('.score span')
-const formDomEl = document.querySelector('form');
-const levelsDomEl = document.querySelector('form select');
-const boxElement = document.querySelector('.box');
+const gameTable = document.getElementById("grid");
+let maxCellsNumber = 100;
+const playBtn = document.getElementById("start-btn")
+const difficulty = document.getElementById("levels")
+let bombs = [];
+let safeNumbers;
 
 
-//aggiungo un bottone per sceglierre la difficolta e lo start
-btn.addEventListener('click', (e) => {
-    
-    e.preventDefault();
+playBtn.addEventListener("click", function () {
+let levels = difficulty.value;
 
-    const levels = levelsDomEl.value;
-    
-    if (levels === 'easy') {
-        squareLimit = 100;
-    } else if (levels === 'medium') {
-        squareLimit = 81;
-    } else if (levels === 'hard') {
-        squareLimit = 49;
+    if (levels === "1") {
+        createTable(gameTable, 100);
+        safeNumbers = 84;
+
+        while (bombs.length < 16) {
+            let randomNumber;
+            do {
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+            } while (bombs.includes(randomNumber));
+
+            bombs.push(randomNumber);
+        }
+
+        console.log(bombs);
+
+
     }
+});
 
-    formDomEl.classList.add('d-none');
 
-    scoreDomEl.classList.remove('d-none')
+function createTable(DOMelement, maxCellsNumber) {
 
-    boxElement.classList.remove('d-none')
+    let gameIsNotOver = true;
+    let score = 0;
 
-    generateSquares(boxElement, squareLimit);
-    
-})
+    for (let i = 0; i < maxCellsNumber; i++) {
+        const square = document.createElement("div");
+
+        square.className = "square";
+        square.append(i + 1);
+        gameTable.append(square);
+
+        playBtn.classList.add("d-none");
+        difficulty.classList.add("d-none");
+      
+    }
+}
