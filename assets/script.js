@@ -33,8 +33,29 @@ let levels = difficulty.value;
         console.log(bombs);
 
 
+    
+
+
+} else if (levels === "2") {
+    createTable(gameTable, 81);
+    safeNumbers = 65;
+
+    while (bombs.length < 16) {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 81) + 1;
+        } while (bombs.includes(randomNumber));
+
+        bombs.push(randomNumber);
     }
+
+    console.log(bombs);
+
+
+
+}
 });
+
 
 
 function createTable(DOMelement, maxCellsNumber) {
