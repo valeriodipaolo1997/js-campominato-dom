@@ -43,3 +43,11 @@ body{
 .d-none{
     display: none;
 }
+
+.safe-cells{
+    background-color: #7FFFD4;
+}
+
+.unsafe-cells{
+    background-color: red;
+}

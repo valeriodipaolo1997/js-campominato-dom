@@ -41,6 +41,7 @@ function createTable(DOMelement, maxCellsNumber) {
 
     let gameIsNotOver = true;
     let score = 0;
+    let squareClicked = false;
 
     for (let i = 0; i < maxCellsNumber; i++) {
         const square = document.createElement("div");
@@ -52,5 +53,33 @@ function createTable(DOMelement, maxCellsNumber) {
         playBtn.classList.add("d-none");
         difficulty.classList.add("d-none");
       
+        square.addEventListener("click", function () {
+
+
+            if (gameIsNotOver) {
+                square.classList.add("safe-cells");
+                let squareClickedNumber = i + 1;
+                if (square.classList.contains("safe-cells") && squareClicked === false) {
+
+                    score++;
+                    squareClicked = true;
+                }
+
+                console.log(score);
+                console.log("Clic sul numero " + squareClickedNumber);
+                if (score === safeNumbers) {
+                    gameIsNotOver = false
+                    console.log("Hai vinto!");
+                }
+
+
+                if (bombs.includes(squareClickedNumber)) {
+                    gameIsNotOver = false
+                    console.log("Hai perso");
+                    square.classList.add("unsafe-cells");
+                    console.log("Punteggio: " + (score - 1));
+                }
+            }
+        })
     }
 }
